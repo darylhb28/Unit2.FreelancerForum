@@ -5,6 +5,7 @@ const freelancers = [
 
 const newFreelancers = [
     { name: "Carol", occupation: "Programmer", price: 70 },
+    { name: "Carol", occupation: "Programmer", price: 70 },
     { name: "Liz", occupation: "Artist", price: 60 },
     { name: "Adam", occupation: "Chef", price: 90 },
     { name: "Sara", occupation: "Designer", price: 20 },
@@ -62,6 +63,12 @@ function init() {
         updateAveragePrice()
     }
 
+    function addCarol (){
+        const Carol = { name: "Carol", occupation: "Programmer", price: 70 };
+        freelancers.push(Carol)
+        renderFreelancers()
+    }
+
     function addFreelancers (){
         const randomIndex = Math.floor(Math.random() * newFreelancers.length)
         const newFreelancer = newFreelancers[randomIndex]
@@ -69,14 +76,15 @@ function init() {
         renderFreelancers()
     }
 
-    renderFreelancers()
+    renderFreelancers();
 
-    const add = setInterval( addFreelancers, 1000)
+   setInterval(addCarol, 1000)
+
+    const add = setInterval(addFreelancers, 1000)
     
     setTimeout(() => {
         clearInterval(add)
       }, 10000);
-
 
 }
 
