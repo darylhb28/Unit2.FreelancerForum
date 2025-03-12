@@ -4,8 +4,6 @@ const freelancers = [
   ];
 
 const newFreelancers = [
-    { name: "Carol", occupation: "Programmer", price: 70 },
-    { name: "Carol", occupation: "Programmer", price: 70 },
     { name: "Liz", occupation: "Artist", price: 60 },
     { name: "Adam", occupation: "Chef", price: 90 },
     { name: "Sara", occupation: "Designer", price: 20 },
@@ -38,12 +36,12 @@ function init() {
     }
 
     function updateAveragePrice() {
-        const h3 = document.getElementById("Average Price");
+        const h3 = document.getElementById("averagePrice");
         h3.innerHTML = `Average Price: $${averagePrice()}`;
     }
 
     const h3 = document.createElement("h3")
-    h3.id = "Average Price"
+    h3.id = "averagePrice"
     h3.innerHTML = `Average Price: ${averagePrice()}`
     body.append(h3);
 
@@ -55,9 +53,9 @@ function init() {
         container.innerHTML = ""
         freelancers.forEach ( person => {
             const freelancer = document.createElement ("tr")
-            freelancer.innerHTML = `<td> Name: ${person.name}</td>
-                                <td> Occupation: ${person.occupation}</td>
-                                <td> Price: ${person.price}</td>`;
+            freelancer.innerHTML = `<td> <strong> Name: </strong> ${person.name}</td>
+                                <td> <strong> Occupation: </strong> ${person.occupation}</td>
+                                <td> <strong> Price: </strong>$${person.price}</td>`;
             container.appendChild(freelancer);
         } )
         updateAveragePrice()
@@ -78,9 +76,18 @@ function init() {
 
     renderFreelancers();
 
-   setInterval(addCarol, 1000)
+    setTimeout(() => {
+        addCarol();
+    }, 1000);
 
-    const add = setInterval(addFreelancers, 1000)
+    let add;
+
+    setTimeout(() => {
+        addFreelancers();
+    
+        add = setInterval(addFreelancers,1000)
+
+    }, 2000);
     
     setTimeout(() => {
         clearInterval(add)
