@@ -33,10 +33,16 @@ function init() {
     function averagePrice() {
         const totalPrice = freelancers.reduce((total, person)=>
         total+person.price,0)
-        return totalPrice / freelancers.length
+        return (totalPrice / freelancers.length).toFixed(2)
+    }
+
+    function updateAveragePrice() {
+        const h3 = document.getElementById("Average Price");
+        h3.innerHTML = `Average Price: $${averagePrice()}`;
     }
 
     const h3 = document.createElement("h3")
+    h3.id = "Average Price"
     h3.innerHTML = `Average Price: ${averagePrice()}`
     body.append(h3);
 
@@ -44,28 +50,26 @@ function init() {
     container.id = "container"
     body.append (container)
 
+    function renderFreelancers (){
+        container.innerHTML = ""
+        freelancers.forEach ( person => {
+            const freelancer = document.createElement ("tr")
+            freelancer.innerHTML = `<td> Name: ${person.name}</td>
+                                <td> Occupation: ${person.occupation}</td>
+                                <td> Price: ${person.price}</td>`;
+            container.appendChild(freelancer);
+        } )
+        updateAveragePrice()
+    }
+
+    function addFreelancers (){
+        const randomIndex = Math.floor(Math.random() * newFreelancers.length)
+        const newFreelancer = newFreelancers[randomIndex]
+        freelancers.push(newFreelancer)
+        renderFreelancers()
+    }
+
     renderFreelancers()
-
-}
-
-function renderFreelancers (){
-    container.innerHTML = ""
-    freelancers.forEach ( person => {
-        const freelancer = document.createElement ("tr")
-        freelancer.innerHTML = `<td> Name: ${person.name}</td>
-                            <td> Occupation: ${person.occupation}</td>
-                            <td> Price: ${person.price}</td>`;
-        container.appendChild(freelancer);
-    } )
-}
-
-
-function addFreelancers (){
-    const randomIndex = Math.floor(Math.random() * newFreelancers.length)
-    const newFreelancer = newFreelancers[randomIndex]
-    freelancers.push(newFreelancer)
-    renderFreelancers()
-}
 
     const add = setInterval( addFreelancers, 1000)
     
@@ -73,5 +77,7 @@ function addFreelancers (){
         clearInterval(add)
       }, 10000);
 
+
+}
 
 init ()
