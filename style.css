@@ -1,0 +1,9 @@
+body {
+    text-align: center;
+}
+
+#freelancers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
